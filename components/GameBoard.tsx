@@ -6,7 +6,11 @@ import { BOARD_WIDTH, BOARD_SIZE, CANDY_COLORS, ANIMATION_DELAY } from '../const
 import { generateRandomBoard, checkForMatches, isAdjacent } from '../utils/gameLogic';
 import { playMatchSound, playSwapSound, playInvalidMoveSound } from '../utils/sound';
 
-export const GameBoard: React.FC = () => {
+interface GameBoardProps {
+  onHome: () => void;
+}
+
+export const GameBoard: React.FC<GameBoardProps> = ({ onHome }) => {
   const [grid, setGrid] = useState<JewelColor[]>([]);
   const [score, setScore] = useState(0);
   const [dragStart, setDragStart] = useState<number | null>(null);
@@ -159,7 +163,7 @@ export const GameBoard: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-game-bg">
-      <ScorePanel score={score} onReset={resetGame} />
+      <ScorePanel score={score} onReset={resetGame} onHome={onHome} />
       
       {/* Game Grid Container */}
       <div 

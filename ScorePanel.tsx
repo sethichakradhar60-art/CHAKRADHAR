@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { Trophy, RefreshCw, Home, Volume2 } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { setMasterVolume } from '../utils/sound';
+import { setMasterVolume } from './utils/sound';
 
 interface ScorePanelProps {
   score: number;
   onReset: () => void;
+  onHome?: () => void;
 }
 
-export const ScorePanel: React.FC<ScorePanelProps> = ({ score, onReset }) => {
+export const ScorePanel: React.FC<ScorePanelProps> = ({ score, onReset, onHome }) => {
   const [volume, setVolume] = useState(0.5);
 
   const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -39,13 +39,13 @@ export const ScorePanel: React.FC<ScorePanelProps> = ({ score, onReset }) => {
           >
             <RefreshCw className="w-5 h-5" />
           </button>
-          <Link 
-            to="/"
+          <button 
+            onClick={onHome}
             className="p-3 bg-rose-600 hover:bg-rose-500 rounded-xl transition-colors text-white"
             aria-label="Quit"
           >
             <Home className="w-5 h-5" />
-          </Link>
+          </button>
         </div>
       </div>
 

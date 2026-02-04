@@ -1,16 +1,18 @@
-import React from 'react';
-import { HashRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState } from 'react';
 import { Home } from './components/Home';
 import { GameBoard } from './components/GameBoard';
 
 const App: React.FC = () => {
+  const [screen, setScreen] = useState<'home' | 'game'>('home');
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/play" element={<GameBoard />} />
-      </Routes>
-    </Router>
+    <>
+      {screen === 'home' ? (
+        <Home onStart={() => setScreen('game')} />
+      ) : (
+        <GameBoard onHome={() => setScreen('home')} />
+      )}
+    </>
   );
 };
 

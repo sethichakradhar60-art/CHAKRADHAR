@@ -1,8 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Play, Gem, Star } from 'lucide-react';
 
-export const Home: React.FC = () => {
+interface HomeProps {
+  onStart?: () => void;
+}
+
+export const Home: React.FC<HomeProps> = ({ onStart }) => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-slate-800 via-slate-900 to-black text-white p-6 relative overflow-hidden">
       
@@ -27,16 +30,16 @@ export const Home: React.FC = () => {
         </div>
 
         {/* Action Button */}
-        <Link 
-          to="/play" 
-          className="group relative w-full"
+        <button 
+          onClick={onStart}
+          className="group relative w-full text-left"
         >
           <div className="absolute -inset-0.5 bg-gradient-to-r from-pink-600 to-purple-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-          <button className="relative w-full bg-slate-900 rounded-xl py-6 px-8 flex items-center justify-center gap-4 hover:bg-slate-800 transition-all border border-slate-700">
+          <div className="relative w-full bg-slate-900 rounded-xl py-6 px-8 flex items-center justify-center gap-4 hover:bg-slate-800 transition-all border border-slate-700">
             <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-slate-300">Play Now</span>
             <Play className="fill-white" size={24} />
-          </button>
-        </Link>
+          </div>
+        </button>
 
         {/* Footer Info */}
         <div className="grid grid-cols-2 gap-4 w-full text-center text-sm text-slate-500">
